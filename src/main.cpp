@@ -1,45 +1,44 @@
+// Copyright 2026 GreenTea
+
+#include <fstream>
+#include <iostream>
+#include <string>
+
 #include "../include/textgen.h"
 
-#include <iostream>
-#include <fstream>
+const int kNpref = 2;
+const int kMaxgen = 1200;
+const char kNonword[] = "\n";
 
-const int NPREF = 2;
-const int MAXGEN = 1200;
-const std::string NONWORD = "\n";
-
-int main()
-{
+int main() {
     std::ifstream input("input.txt");
 
-    if (!input)
-    {
-        std::cout << "Ошибка: не удалось открыть input.txt" << std::endl;
+    if (!input) {
+        std::cout << "Error: cannot open input.txt" << std::endl;
         return 1;
     }
 
     std::ofstream output("result/gen.txt");
 
-    if (!output)
-    {
-        std::cout << "Ошибка: не удалось открыть result/gen.txt" << std::endl;
+    if (!output) {
+        std::cout << "Error: cannot open result/gen.txt" << std::endl;
         return 1;
     }
 
     StateTab statetab;
     Prefix prefix;
 
-    for (int i = 0; i < NPREF; i++)
-    {
-        prefix.push_back(NONWORD);
+    for (int i = 0; i < kNpref; i++) {
+        prefix.push_back(kNonword);
     }
 
     build(statetab, prefix, input);
-    generate(statetab, MAXGEN, output);
+    generate(statetab, kMaxgen, output);
 
     input.close();
     output.close();
 
-    std::cout << "Текст успешно сгенерирован в файл result/gen.txt" << std::endl;
+    std::cout << "Text generated in result/gen.txt" << std::endl;
 
     return 0;
 }
