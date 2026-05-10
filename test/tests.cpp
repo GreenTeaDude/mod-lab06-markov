@@ -1,14 +1,15 @@
-// Copyright 2021 GHA Test Team
+// Copyright 2026 GreenTea
+
 #include <gtest/gtest.h>
+
+#include <sstream>
+#include <string>
 
 #include "../include/textgen.h"
 
-#include <sstream>
+const char kNonwordTest[] = "\n";
 
-const std::string NONWORD_TEST = "\n";
-
-TEST(PrefixTest, PrefixSize)
-{
+TEST(PrefixTest, PrefixSize) {
     Prefix prefix;
 
     prefix.push_back("one");
@@ -17,8 +18,7 @@ TEST(PrefixTest, PrefixSize)
     ASSERT_EQ(prefix.size(), 2);
 }
 
-TEST(AddTest, AddCreatesRecord)
-{
+TEST(AddTest, AddCreatesRecord) {
     StateTab table;
     Prefix prefix;
 
@@ -35,8 +35,7 @@ TEST(AddTest, AddCreatesRecord)
     ASSERT_EQ(table[key][0], "three");
 }
 
-TEST(AddTest, PrefixShift)
-{
+TEST(AddTest, PrefixShift) {
     StateTab table;
     Prefix prefix;
 
@@ -49,13 +48,12 @@ TEST(AddTest, PrefixShift)
     ASSERT_EQ(prefix.back(), "three");
 }
 
-TEST(BuildTest, BuildTable)
-{
+TEST(BuildTest, BuildTable) {
     StateTab table;
     Prefix prefix;
 
-    prefix.push_back(NONWORD_TEST);
-    prefix.push_back(NONWORD_TEST);
+    prefix.push_back(kNonwordTest);
+    prefix.push_back(kNonwordTest);
 
     std::stringstream input("hello world hello");
 
@@ -64,13 +62,12 @@ TEST(BuildTest, BuildTable)
     ASSERT_FALSE(table.empty());
 }
 
-TEST(GenerateTest, GenerateText)
-{
+TEST(GenerateTest, GenerateText) {
     StateTab table;
     Prefix prefix;
 
-    prefix.push_back(NONWORD_TEST);
-    prefix.push_back(NONWORD_TEST);
+    prefix.push_back(kNonwordTest);
+    prefix.push_back(kNonwordTest);
 
     std::stringstream input("hello world hello world");
     std::stringstream output;
