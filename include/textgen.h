@@ -1,12 +1,15 @@
+// Copyright 2026 GreenTea
+
 #pragma once
 
+#include <deque>
+#include <iosfwd>
+#include <map>
 #include <string>
 #include <vector>
-#include <deque>
-#include <map>
 
 typedef std::deque<std::string> Prefix;
-typedef std::map<Prefix, std::vector<std::string>> StateTab;
+typedef std::map<Prefix, std::vector<std::string> > StateTab;
 
 void add(StateTab& statetab, Prefix& prefix, const std::string& suffix);
 void build(StateTab& statetab, Prefix& prefix, std::istream& in);
